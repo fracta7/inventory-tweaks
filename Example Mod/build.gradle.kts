@@ -5,13 +5,19 @@ plugins {
 base { archivesName.set(project.extra["archives_base_name"] as String) }
 version = project.extra["mod_version"] as String
 group = project.extra["maven_group"] as String
-repositories {}
+repositories {
+    maven{
+        name = "CottonMC"
+        url = uri("https://server.bbkr.space/artifactory/libs-release")
+    }
+}
 dependencies {
     minecraft("com.mojang", "minecraft", project.extra["minecraft_version"] as String)
     mappings("net.fabricmc", "yarn", project.extra["yarn_mappings"] as String, null, "v2")
     modImplementation("net.fabricmc", "fabric-loader", project.extra["loader_version"] as String)
     modImplementation("net.fabricmc.fabric-api", "fabric-api", project.extra["fabric_version"] as String)
     modImplementation("net.fabricmc", "fabric-language-kotlin", project.extra["fabric_language_kotlin_version"] as String)
+    modImplementation("io.github.cottonmc", "LibGui", "6.3.0+1.19")
 }
 tasks {
     val javaVersion = JavaVersion.VERSION_17
