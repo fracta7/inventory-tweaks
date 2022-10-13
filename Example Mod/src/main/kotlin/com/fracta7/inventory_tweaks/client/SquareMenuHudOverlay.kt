@@ -54,24 +54,31 @@ class SquareMenuHudOverlay(val openSquareKey: KeyBinding) : HudRenderCallback {
                 0 -> {
                     draw(x - 32, y - 32, matrixStack)
                 }
+
                 1 -> {
                     draw(x - 12, y - 32, matrixStack)
                 }
+
                 2 -> {
                     draw(x + 8, y - 32, matrixStack)
                 }
+
                 3 -> {
                     draw(x + 8, y - 12, matrixStack)
                 }
+
                 4 -> {
                     draw(x + 8, y + 8, matrixStack)
                 }
+
                 5 -> {
                     draw(x - 12, y + 8, matrixStack)
                 }
+
                 6 -> {
                     draw(x - 32, y + 8, matrixStack)
                 }
+
                 7 -> {
                     draw(x - 32, y - 12, matrixStack)
                 }
@@ -79,11 +86,10 @@ class SquareMenuHudOverlay(val openSquareKey: KeyBinding) : HudRenderCallback {
             matrixStack.translate(0.0, 0.0, 32.0)
             RenderSystem.applyModelViewMatrix()
             client.itemRenderer.zOffset = 200f
-            client.itemRenderer.renderInGuiWithOverrides(item,x,y)
+            client.itemRenderer.renderInGuiWithOverrides(item, x - 28, y - 28)
             client.itemRenderer.zOffset = 0f
         }
     }
-
 }
 
 private fun draw(x: Int, y: Int, matrixStack: MatrixStack) {
