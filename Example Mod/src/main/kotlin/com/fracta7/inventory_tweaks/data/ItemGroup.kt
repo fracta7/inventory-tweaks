@@ -2,7 +2,6 @@ package com.fracta7.inventory_tweaks.data
 
 import net.minecraft.item.Items
 
-
 val stone_brick = listOf(
     Items.STONE_BRICK_WALL,
     Items.STONE_BRICK_SLAB,
@@ -202,7 +201,7 @@ val red_sandstone = listOf(
     Items.CHISELED_RED_SANDSTONE,
     Items.RED_SANDSTONE
 )
-val red_smooth_RED_SANDSTONE = listOf(
+val red_smooth_sandstone = listOf(
     Items.SMOOTH_RED_SANDSTONE_SLAB,
     Items.SMOOTH_RED_SANDSTONE_STAIRS,
     Items.SMOOTH_RED_SANDSTONE
@@ -379,7 +378,15 @@ val froglight = listOf(
     Items.OCHRE_FROGLIGHT,
     Items.VERDANT_FROGLIGHT
 )
-val tools = listOf(
+val pickaxes = listOf(
+    Items.WOODEN_PICKAXE,
+    Items.STONE_PICKAXE,
+    Items.GOLDEN_PICKAXE,
+    Items.IRON_PICKAXE,
+    Items.DIAMOND_PICKAXE,
+    Items.NETHERITE_PICKAXE
+)
+val helper_tools = listOf(
     Items.WOODEN_SHOVEL,
     Items.STONE_SHOVEL,
     Items.IRON_SHOVEL,
