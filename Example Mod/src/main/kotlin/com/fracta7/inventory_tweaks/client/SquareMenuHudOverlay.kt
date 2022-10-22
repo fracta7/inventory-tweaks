@@ -35,27 +35,9 @@ class SquareMenuHudOverlay(val openSquareKey: KeyBinding) : HudRenderCallback {
         var isAvailable: MutableList<Boolean> = mutableListOf()
         val items: MutableList<ItemStack> = mutableListOf()
         val slotId: MutableList<Int> = mutableListOf()
-        val pickaxesInventory: MutableList<ItemStack> = mutableListOf()
         item =
             if (client.player?.inventory?.mainHandStack != null) client.player!!.inventory.mainHandStack else Items.AIR.defaultStack
-        if (client.player?.inventory != null) {
-            var counter = 0
-            var current: Int
-            val inventory = client.player!!.inventory.main
-            pickaxes.forEach { it1 ->
-                inventory.forEach { it2 ->
-                    if (it2.item == it1) {
-                        current = inventory.indexOf(it2)
-                        pickaxesInventory.add(inventory[current])
-                        slotId.add(current)
-                        counter++
-                    }
-                }
-            }
-
-        } else {
-            isInventoryEmpty = true
-        }
+        isInventoryEmpty = client.player?.inventory == null
         var x = 0
         var y = 0
         val client = MinecraftClient.getInstance()
@@ -73,31 +55,6 @@ class SquareMenuHudOverlay(val openSquareKey: KeyBinding) : HudRenderCallback {
             }
         }
         if (openSquareKey.isPressed && isToggleable(item.item)) {
-            if (helper_tools.contains(item.item) || misc_tools.contains(item.item) || pickaxes.contains(item.item)) {
-                RenderSystem.setShader(GameRenderer::getPositionShader)
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-                RenderSystem.setShaderTexture(0, TOOL_LIST)
-                var nText = -63
-                var nGui = -70
-                var n = -67
-                pickaxesInventory.forEach {
-                    DrawableHelper.drawTexture(matrixStack, x - 91, (y * 2) + nGui, 0f, 0f, 182, 22, 182, 22)
-                    client.itemRenderer.zOffset = 200f
-                    client.itemRenderer.renderInGuiWithOverrides(it, x - 88, (y * 2) + n)
-                    client.textRenderer.draw(
-                        matrixStack,
-                        it.name,
-                        (x - 64).toFloat(),
-                        ((y * 2) + nText).toFloat(),
-                        0xffffff
-                    )
-                    client.itemRenderer.zOffset = 0f
-                    n -= 18
-                    nGui-=22
-                    nText -= 22
-                }
-
-            } else {
                 RenderSystem.setShader(GameRenderer::getPositionShader)
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
                 RenderSystem.setShaderTexture(0, SQUARE_WHEEL)
@@ -147,7 +104,7 @@ class SquareMenuHudOverlay(val openSquareKey: KeyBinding) : HudRenderCallback {
             }
         }
     }
-}
+
 
 private fun draw(x: Int, y: Int, matrixStack: MatrixStack) {
     DrawableHelper.drawTexture(matrixStack, x, y, 0f, 0f, 24, 24, 24, 24)
@@ -204,8 +161,5 @@ private fun isToggleable(item: Item): Boolean {
             netherrack.contains(item) ||
             leaves.contains(item) ||
             saplings.contains(item) ||
-            froglight.contains(item) ||
-            helper_tools.contains(item) ||
-            misc_tools.contains(item) ||
-            pickaxes.contains(item)
+            froglight.contains(item)
 }
